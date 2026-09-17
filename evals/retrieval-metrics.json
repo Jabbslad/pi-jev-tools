@@ -1,0 +1,774 @@
+{
+  "resultDirectory": "evals/results/retrieval-2026-09-17T22-27-21.400Z",
+  "manifest": {
+    "mainModel": "zai/glm-5.3-flash",
+    "thinking": "off",
+    "jevModel": "jev-1.13.0",
+    "repeats": 2,
+    "cases": [
+      {
+        "id": "retry",
+        "query": "Where does the active client honor Retry-After, and what is the maximum retry delay?",
+        "terms": [
+          "retry",
+          "after"
+        ],
+        "relevant": [
+          "src/net/retry-policy.ts",
+          "docs/operations/retries.md"
+        ],
+        "facts": [
+          "retry-after",
+          "60000|60 seconds|60-second"
+        ]
+      },
+      {
+        "id": "refresh",
+        "query": "What prevents simultaneous access token refresh requests in the active client, and where is it called?",
+        "terms": [
+          "refresh",
+          "token"
+        ],
+        "relevant": [
+          "src/auth/token-refresh.ts",
+          "src/api/request.ts"
+        ],
+        "facts": [
+          "inflightrefresh",
+          "src/api/request.ts"
+        ]
+      },
+      {
+        "id": "rollback",
+        "query": "Which command verifies the snapshot before a production rollback, and whose approval is required?",
+        "terms": [
+          "snapshot",
+          "rollback"
+        ],
+        "relevant": [
+          "docs/deploy/rollback.md",
+          "docs/deploy/snapshots.md"
+        ],
+        "facts": [
+          "snapshot verify",
+          "release.owner"
+        ]
+      },
+      {
+        "id": "port",
+        "query": "What is the active server port configuration precedence, and which default is used?",
+        "terms": [
+          "port",
+          "config"
+        ],
+        "relevant": [
+          "src/config/load.ts",
+          "docs/configuration.md"
+        ],
+        "facts": [
+          "8080",
+          "server_port",
+          "file"
+        ]
+      }
+    ],
+    "sourceHashes": {
+      "src/search.ts": "25947a40e90237feb38fcd23d5e6381987ff67abf9947cfef4beafc6ac90eeae",
+      "src/retrieval.ts": "dbd5ffe9575843c73da8b42febb3084c6e52b41d9a2d6fdb7822f71a352c9afe",
+      "src/decisions.ts": "94858e27defc683801c58f059230a14f8bf86886ce29e937e9aae2cf8e88d7fe",
+      "src/client.ts": "c40a14cd57b2b0c0b6892079e026e85b31459481f3d1e3b7bb7fad85f4dd829e",
+      "evals/retrieval-fixture.ts": "3f41ca632b46476de9a95049fba739bdcdedbd4b5213f2880552c4667b6c3b22",
+      "scripts/eval-retrieval.ts": "2379dbd5fdaa5fdc359a9cfa039bdcf55493ac9caab1a482567c2f0783554389"
+    },
+    "protocol": "Synthetic fixture labels fixed before model calls. Two independent stages: direct lexical-vs-ranked recall, then autonomous same-prompt A/B (Jev search available, not forced). Read/grep/find/ls in both arms. No tool/question tuning after outcomes."
+  },
+  "retrieval": [
+    {
+      "case": "retry",
+      "seconds": 1.9812195039999998,
+      "candidateRecall": 1,
+      "lexicalRecallAt5": 0,
+      "rankedRecallAt5": 1,
+      "usage": {
+        "input": 17574,
+        "output": 630,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 18204,
+        "cost": {
+          "input": 0.000738108,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0.000738108
+        }
+      },
+      "batches": 4,
+      "contextBytes": {
+        "candidate_snippets": 63213,
+        "returned_snippets": 5873
+      },
+      "paths": [
+        "docs/operations/retries.md",
+        "src/net/retry-policy.ts",
+        "examples/archive/port-03.md",
+        "examples/archive/port-07.md",
+        "examples/archive/refresh-05.md"
+      ]
+    },
+    {
+      "case": "refresh",
+      "seconds": 1.394912146,
+      "candidateRecall": 1,
+      "lexicalRecallAt5": 0.5,
+      "rankedRecallAt5": 1,
+      "usage": {
+        "input": 17331,
+        "output": 614,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 17945,
+        "cost": {
+          "input": 0.000727902,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0.000727902
+        }
+      },
+      "batches": 4,
+      "contextBytes": {
+        "candidate_snippets": 62802,
+        "returned_snippets": 5790
+      },
+      "paths": [
+        "src/auth/token-refresh.ts",
+        "src/api/request.ts",
+        "examples/archive/rollback-14.md",
+        "examples/archive/retry-08.md",
+        "examples/archive/rollback-18.md"
+      ]
+    },
+    {
+      "case": "rollback",
+      "seconds": 2.1716879370000006,
+      "candidateRecall": 1,
+      "lexicalRecallAt5": 1,
+      "rankedRecallAt5": 1,
+      "usage": {
+        "input": 17278,
+        "output": 614,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 17892,
+        "cost": {
+          "input": 0.0007256760000000001,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0.0007256760000000001
+        }
+      },
+      "batches": 4,
+      "contextBytes": {
+        "candidate_snippets": 62759,
+        "returned_snippets": 5740
+      },
+      "paths": [
+        "docs/deploy/snapshots.md",
+        "docs/deploy/rollback.md",
+        "examples/archive/retry-08.md",
+        "examples/archive/port-03.md",
+        "examples/archive/refresh-05.md"
+      ]
+    },
+    {
+      "case": "port",
+      "seconds": 1.981994615999999,
+      "candidateRecall": 1,
+      "lexicalRecallAt5": 0.5,
+      "rankedRecallAt5": 1,
+      "usage": {
+        "input": 18150,
+        "output": 678,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "totalTokens": 18828,
+        "cost": {
+          "input": 0.0007623,
+          "output": 0,
+          "cacheRead": 0,
+          "cacheWrite": 0,
+          "total": 0.0007623
+        }
+      },
+      "batches": 4,
+      "contextBytes": {
+        "candidate_snippets": 63980,
+        "returned_snippets": 5613
+      },
+      "paths": [
+        "docs/configuration.md",
+        "src/config/load.ts",
+        "examples/archive/port-03.md",
+        "examples/archive/port-07.md",
+        "examples/archive/refresh-01.md"
+      ]
+    }
+  ],
+  "arms": [
+    {
+      "arm": "baseline",
+      "runs": 8,
+      "meanSeconds": 19.977,
+      "meanContextTokens": 14985.25,
+      "meanUsd": 0.0005640662499999999,
+      "meanToolTextBytes": 21747.375,
+      "meanReadRecall": 0.875,
+      "jevCalls": 0,
+      "toolErrors": 0
+    },
+    {
+      "arm": "jev",
+      "runs": 8,
+      "meanSeconds": 19.968874999999997,
+      "meanContextTokens": 26008.25,
+      "meanUsd": 0.0010182005,
+      "meanToolTextBytes": 36680.75,
+      "meanReadRecall": 0.8125,
+      "jevCalls": 1,
+      "toolErrors": 0
+    }
+  ],
+  "sessions": [
+    {
+      "name": "retry.baseline.1",
+      "case": "retry",
+      "arm": "baseline",
+      "repeat": 1,
+      "seconds": 17.337,
+      "exit": 0,
+      "mainUsage": {
+        "tokens": 6843,
+        "contextTokens": 6611,
+        "usd": 0.000327265
+      },
+      "nestedUsage": {
+        "tokens": 0,
+        "contextTokens": 0,
+        "usd": 0
+      },
+      "toolTextBytes": 6154,
+      "toolErrors": 0,
+      "jevCalls": 0,
+      "readRecall": 1,
+      "factChecks": [
+        {
+          "pattern": "retry-after",
+          "found": true
+        },
+        {
+          "pattern": "60000|60 seconds|60-second",
+          "found": true
+        }
+      ]
+    },
+    {
+      "name": "retry.jev.1",
+      "case": "retry",
+      "arm": "jev",
+      "repeat": 1,
+      "seconds": 22.946,
+      "exit": 0,
+      "mainUsage": {
+        "tokens": 36811,
+        "contextTokens": 36491,
+        "usd": 0.001399865
+      },
+      "nestedUsage": {
+        "tokens": 0,
+        "contextTokens": 0,
+        "usd": 0
+      },
+      "toolTextBytes": 47607,
+      "toolErrors": 0,
+      "jevCalls": 0,
+      "readRecall": 0.5,
+      "factChecks": [
+        {
+          "pattern": "retry-after",
+          "found": true
+        },
+        {
+          "pattern": "60000|60 seconds|60-second",
+          "found": true
+        }
+      ]
+    },
+    {
+      "name": "refresh.baseline.1",
+      "case": "refresh",
+      "arm": "baseline",
+      "repeat": 1,
+      "seconds": 19.652,
+      "exit": 0,
+      "mainUsage": {
+        "tokens": 12852,
+        "contextTokens": 12500,
+        "usd": 0.00054166
+      },
+      "nestedUsage": {
+        "tokens": 0,
+        "contextTokens": 0,
+        "usd": 0
+      },
+      "toolTextBytes": 22749,
+      "toolErrors": 0,
+      "jevCalls": 0,
+      "readRecall": 1,
+      "factChecks": [
+        {
+          "pattern": "inflightrefresh",
+          "found": true
+        },
+        {
+          "pattern": "src/api/request.ts",
+          "found": true
+        }
+      ]
+    },
+    {
+      "name": "refresh.jev.1",
+      "case": "refresh",
+      "arm": "jev",
+      "repeat": 1,
+      "seconds": 21.724,
+      "exit": 0,
+      "mainUsage": {
+        "tokens": 37761,
+        "contextTokens": 37474,
+        "usd": 0.00131558
+      },
+      "nestedUsage": {
+        "tokens": 0,
+        "contextTokens": 0,
+        "usd": 0
+      },
+      "toolTextBytes": 52549,
+      "toolErrors": 0,
+      "jevCalls": 0,
+      "readRecall": 1,
+      "factChecks": [
+        {
+          "pattern": "inflightrefresh",
+          "found": true
+        },
+        {
+          "pattern": "src/api/request.ts",
+          "found": true
+        }
+      ]
+    },
+    {
+      "name": "rollback.baseline.1",
+      "case": "rollback",
+      "arm": "baseline",
+      "repeat": 1,
+      "seconds": 20.184,
+      "exit": 0,
+      "mainUsage": {
+        "tokens": 19274,
+        "contextTokens": 19001,
+        "usd": 0.000644685
+      },
+      "nestedUsage": {
+        "tokens": 0,
+        "contextTokens": 0,
+        "usd": 0
+      },
+      "toolTextBytes": 25255,
+      "toolErrors": 0,
+      "jevCalls": 0,
+      "readRecall": 1,
+      "factChecks": [
+        {
+          "pattern": "snapshot verify",
+          "found": true
+        },
+        {
+          "pattern": "release.owner",
+          "found": true
+        }
+      ]
+    },
+    {
+      "name": "rollback.jev.1",
+      "case": "rollback",
+      "arm": "jev",
+      "repeat": 1,
+      "seconds": 19.522,
+      "exit": 0,
+      "mainUsage": {
+        "tokens": 18786,
+        "contextTokens": 18559,
+        "usd": 0.000722915
+      },
+      "nestedUsage": {
+        "tokens": 18353,
+        "contextTokens": 17707,
+        "usd": 0.000743694
+      },
+      "toolTextBytes": 32979,
+      "toolErrors": 0,
+      "jevCalls": 1,
+      "readRecall": 1,
+      "factChecks": [
+        {
+          "pattern": "snapshot verify",
+          "found": true
+        },
+        {
+          "pattern": "release.owner",
+          "found": true
+        }
+      ]
+    },
+    {
+      "name": "port.baseline.1",
+      "case": "port",
+      "arm": "baseline",
+      "repeat": 1,
+      "seconds": 17.776,
+      "exit": 0,
+      "mainUsage": {
+        "tokens": 12511,
+        "contextTokens": 12276,
+        "usd": 0.0004994499999999999
+      },
+      "nestedUsage": {
+        "tokens": 0,
+        "contextTokens": 0,
+        "usd": 0
+      },
+      "toolTextBytes": 21978,
+      "toolErrors": 0,
+      "jevCalls": 0,
+      "readRecall": 0.5,
+      "factChecks": [
+        {
+          "pattern": "8080",
+          "found": true
+        },
+        {
+          "pattern": "server_port",
+          "found": true
+        },
+        {
+          "pattern": "file",
+          "found": true
+        }
+      ]
+    },
+    {
+      "name": "port.jev.1",
+      "case": "port",
+      "arm": "jev",
+      "repeat": 1,
+      "seconds": 21.326,
+      "exit": 0,
+      "mainUsage": {
+        "tokens": 38290,
+        "contextTokens": 38008,
+        "usd": 0.0012622199999999999
+      },
+      "nestedUsage": {
+        "tokens": 0,
+        "contextTokens": 0,
+        "usd": 0
+      },
+      "toolTextBytes": 53752,
+      "toolErrors": 0,
+      "jevCalls": 0,
+      "readRecall": 0.5,
+      "factChecks": [
+        {
+          "pattern": "8080",
+          "found": true
+        },
+        {
+          "pattern": "server_port",
+          "found": true
+        },
+        {
+          "pattern": "file",
+          "found": true
+        }
+      ]
+    },
+    {
+      "name": "retry.jev.2",
+      "case": "retry",
+      "arm": "jev",
+      "repeat": 2,
+      "seconds": 14.609,
+      "exit": 0,
+      "mainUsage": {
+        "tokens": 9024,
+        "contextTokens": 8747,
+        "usd": 0.000295195
+      },
+      "nestedUsage": {
+        "tokens": 0,
+        "contextTokens": 0,
+        "usd": 0
+      },
+      "toolTextBytes": 6154,
+      "toolErrors": 0,
+      "jevCalls": 0,
+      "readRecall": 1,
+      "factChecks": [
+        {
+          "pattern": "retry-after",
+          "found": true
+        },
+        {
+          "pattern": "60000|60 seconds|60-second",
+          "found": true
+        }
+      ]
+    },
+    {
+      "name": "retry.baseline.2",
+      "case": "retry",
+      "arm": "baseline",
+      "repeat": 2,
+      "seconds": 16.501,
+      "exit": 0,
+      "mainUsage": {
+        "tokens": 12992,
+        "contextTokens": 12762,
+        "usd": 0.00052313
+      },
+      "nestedUsage": {
+        "tokens": 0,
+        "contextTokens": 0,
+        "usd": 0
+      },
+      "toolTextBytes": 24148,
+      "toolErrors": 0,
+      "jevCalls": 0,
+      "readRecall": 0.5,
+      "factChecks": [
+        {
+          "pattern": "retry-after",
+          "found": true
+        },
+        {
+          "pattern": "60000|60 seconds|60-second",
+          "found": true
+        }
+      ]
+    },
+    {
+      "name": "refresh.jev.2",
+      "case": "refresh",
+      "arm": "jev",
+      "repeat": 2,
+      "seconds": 24.672,
+      "exit": 0,
+      "mainUsage": {
+        "tokens": 21901,
+        "contextTokens": 21539,
+        "usd": 0.0006998449999999999
+      },
+      "nestedUsage": {
+        "tokens": 0,
+        "contextTokens": 0,
+        "usd": 0
+      },
+      "toolTextBytes": 24082,
+      "toolErrors": 0,
+      "jevCalls": 0,
+      "readRecall": 1,
+      "factChecks": [
+        {
+          "pattern": "inflightrefresh",
+          "found": true
+        },
+        {
+          "pattern": "src/api/request.ts",
+          "found": true
+        }
+      ]
+    },
+    {
+      "name": "refresh.baseline.2",
+      "case": "refresh",
+      "arm": "baseline",
+      "repeat": 2,
+      "seconds": 22.057,
+      "exit": 0,
+      "mainUsage": {
+        "tokens": 19236,
+        "contextTokens": 18914,
+        "usd": 0.00065809
+      },
+      "nestedUsage": {
+        "tokens": 0,
+        "contextTokens": 0,
+        "usd": 0
+      },
+      "toolTextBytes": 24449,
+      "toolErrors": 0,
+      "jevCalls": 0,
+      "readRecall": 1,
+      "factChecks": [
+        {
+          "pattern": "inflightrefresh",
+          "found": true
+        },
+        {
+          "pattern": "src/api/request.ts",
+          "found": true
+        }
+      ]
+    },
+    {
+      "name": "rollback.jev.2",
+      "case": "rollback",
+      "arm": "jev",
+      "repeat": 2,
+      "seconds": 22.02,
+      "exit": 0,
+      "mainUsage": {
+        "tokens": 22102,
+        "contextTokens": 21818,
+        "usd": 0.0006897499999999999
+      },
+      "nestedUsage": {
+        "tokens": 0,
+        "contextTokens": 0,
+        "usd": 0
+      },
+      "toolTextBytes": 25084,
+      "toolErrors": 0,
+      "jevCalls": 0,
+      "readRecall": 1,
+      "factChecks": [
+        {
+          "pattern": "snapshot verify",
+          "found": true
+        },
+        {
+          "pattern": "release.owner",
+          "found": true
+        }
+      ]
+    },
+    {
+      "name": "rollback.baseline.2",
+      "case": "rollback",
+      "arm": "baseline",
+      "repeat": 2,
+      "seconds": 22.554,
+      "exit": 0,
+      "mainUsage": {
+        "tokens": 19289,
+        "contextTokens": 18939,
+        "usd": 0.0006631249999999999
+      },
+      "nestedUsage": {
+        "tokens": 0,
+        "contextTokens": 0,
+        "usd": 0
+      },
+      "toolTextBytes": 25083,
+      "toolErrors": 0,
+      "jevCalls": 0,
+      "readRecall": 1,
+      "factChecks": [
+        {
+          "pattern": "snapshot verify",
+          "found": true
+        },
+        {
+          "pattern": "release.owner",
+          "found": true
+        }
+      ]
+    },
+    {
+      "name": "port.jev.2",
+      "case": "port",
+      "arm": "jev",
+      "repeat": 2,
+      "seconds": 12.932,
+      "exit": 0,
+      "mainUsage": {
+        "tokens": 25615,
+        "contextTokens": 25430,
+        "usd": 0.0010165399999999998
+      },
+      "nestedUsage": {
+        "tokens": 0,
+        "contextTokens": 0,
+        "usd": 0
+      },
+      "toolTextBytes": 51239,
+      "toolErrors": 0,
+      "jevCalls": 0,
+      "readRecall": 0.5,
+      "factChecks": [
+        {
+          "pattern": "8080",
+          "found": true
+        },
+        {
+          "pattern": "server_port",
+          "found": true
+        },
+        {
+          "pattern": "file",
+          "found": true
+        }
+      ]
+    },
+    {
+      "name": "port.baseline.2",
+      "case": "port",
+      "arm": "baseline",
+      "repeat": 2,
+      "seconds": 23.755,
+      "exit": 0,
+      "mainUsage": {
+        "tokens": 19215,
+        "contextTokens": 18879,
+        "usd": 0.0006551249999999999
+      },
+      "nestedUsage": {
+        "tokens": 0,
+        "contextTokens": 0,
+        "usd": 0
+      },
+      "toolTextBytes": 24163,
+      "toolErrors": 0,
+      "jevCalls": 0,
+      "readRecall": 1,
+      "factChecks": [
+        {
+          "pattern": "8080",
+          "found": true
+        },
+        {
+          "pattern": "server_port",
+          "found": true
+        },
+        {
+          "pattern": "file",
+          "found": true
+        }
+      ]
+    }
+  ],
+  "review": "All 16 final answers contain correct core facts; some line citations were inaccurate. This is assistant-reviewed synthetic development evidence, not independent production validation."
+}

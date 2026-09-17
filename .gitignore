@@ -1,0 +1,5 @@
+node_modules/
+.pi/
+.env
+.env.*
+evals/results/

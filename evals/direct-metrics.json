@@ -1,0 +1,771 @@
+{
+  "manifest": {
+    "startedAt": "2026-09-17T21:35:28.042Z",
+    "revision": "57ec275d8078af65b7731c2a98be812d844a6d6b",
+    "seed": "pi-typesafe-banking77-pilot-v1",
+    "sampleHash": "e09506b16c009c040c38e118ef5a2cef3fc6f50dc0204acd7ddad38ce1e2743c",
+    "categories": [
+      "Refund_not_showing_up",
+      "activate_my_card",
+      "age_limit",
+      "apple_pay_or_google_pay",
+      "atm_support",
+      "automatic_top_up",
+      "balance_not_updated_after_bank_transfer",
+      "balance_not_updated_after_cheque_or_cash_deposit",
+      "beneficiary_not_allowed",
+      "cancel_transfer",
+      "card_about_to_expire",
+      "card_acceptance",
+      "card_arrival",
+      "card_delivery_estimate",
+      "card_linking",
+      "card_not_working",
+      "card_payment_fee_charged",
+      "card_payment_not_recognised",
+      "card_payment_wrong_exchange_rate",
+      "card_swallowed",
+      "cash_withdrawal_charge",
+      "cash_withdrawal_not_recognised",
+      "change_pin",
+      "compromised_card",
+      "contactless_not_working",
+      "country_support",
+      "declined_card_payment",
+      "declined_cash_withdrawal",
+      "declined_transfer",
+      "direct_debit_payment_not_recognised",
+      "disposable_card_limits",
+      "edit_personal_details",
+      "exchange_charge",
+      "exchange_rate",
+      "exchange_via_app",
+      "extra_charge_on_statement",
+      "failed_transfer",
+      "fiat_currency_support",
+      "get_disposable_virtual_card",
+      "get_physical_card",
+      "getting_spare_card",
+      "getting_virtual_card",
+      "lost_or_stolen_card",
+      "lost_or_stolen_phone",
+      "order_physical_card",
+      "passcode_forgotten",
+      "pending_card_payment",
+      "pending_cash_withdrawal",
+      "pending_top_up",
+      "pending_transfer",
+      "pin_blocked",
+      "receiving_money",
+      "request_refund",
+      "reverted_card_payment?",
+      "supported_cards_and_currencies",
+      "terminate_account",
+      "top_up_by_bank_transfer_charge",
+      "top_up_by_card_charge",
+      "top_up_by_cash_or_cheque",
+      "top_up_failed",
+      "top_up_limits",
+      "top_up_reverted",
+      "topping_up_by_card",
+      "transaction_charged_twice",
+      "transfer_fee_charged",
+      "transfer_into_account",
+      "transfer_not_received_by_recipient",
+      "transfer_timing",
+      "unable_to_verify_identity",
+      "verify_my_identity",
+      "verify_source_of_funds",
+      "verify_top_up",
+      "virtual_card_not_working",
+      "visa_or_mastercard",
+      "why_verify_identity",
+      "wrong_amount_of_cash_received",
+      "wrong_exchange_rate_for_cash_withdrawal"
+    ],
+    "sourceHashes": {
+      "scripts/direct-core.ts": "8599901349e3a8035668f67bf033cfe6046de7b64db026e507970ddbe121ad02",
+      "scripts/direct-benchmark.ts": "f5224f02bcefa99feb4302841da4427c5f97208c8459c5f2633a169d257122be",
+      "package-lock.json": "7dde4f82bb9dd1ac19e7e0ac8c2abd80a9aba7da9df8062a8ca99f2935882924"
+    },
+    "mainModel": {
+      "id": "glm-5.3-flash",
+      "provider": "zai",
+      "cost": {
+        "input": 0.075,
+        "output": 0.25,
+        "cacheRead": 0.015,
+        "cacheWrite": 0
+      }
+    },
+    "typesafeModel": "jev-1.13.0",
+    "temperature": 0,
+    "thinking": "disabled",
+    "maxOutputTokens": 16384,
+    "retries": 0,
+    "timeoutMs": 180000,
+    "batchSize": 7,
+    "repeats": 2,
+    "probabilityPrompt": "Evaluate the supplied state against every fixed Choice question. Do not rewrite questions. Return the selected option and a probability for EVERY option (including zeros), summing to one. The selected option must have maximal probability. Report genuine uncertainty. Call submit_answers once with all answers; no explanation or other tools.",
+    "labelPrompt": "Evaluate the supplied state against every fixed Choice question. Do not rewrite questions. Return the selected option for each question. Call submit_answers once with all answers; no explanation or other tools.",
+    "notes": "No agent loop, no repairs; labels-only is a separate output-cost control. Raw rounding tolerance 0.05, then normalize for probability metrics."
+  },
+  "resultDirectory": "evals/results/banking77-pilot/2026-09-17T21-35-28.042Z",
+  "scoringNote": "Recomputed offline with 1e-12 numerical epsilon at the unchanged inclusive 0.05 sum tolerance. Original run-time results preserved.",
+  "arms": [
+    {
+      "arm": "jev",
+      "calls": 22,
+      "structurallyValidCalls": 22,
+      "examplesIncludingRepeats": 154,
+      "correct": 123,
+      "validPredictions": 154,
+      "accuracy": 0.7987012987012987,
+      "rawChoiceCorrectDiagnostic": 123,
+      "validProbabilityRows": 154,
+      "brier": 0.3028129568013864,
+      "logLoss": 2.1969305193599626,
+      "calibration": {
+        "bins": [
+          {
+            "lower": 0,
+            "upper": 0.2,
+            "count": 0,
+            "accuracy": null,
+            "meanProbability": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.4,
+            "count": 2,
+            "accuracy": 1,
+            "meanProbability": 0.375
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.6,
+            "count": 8,
+            "accuracy": 0.375,
+            "meanProbability": 0.48375
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.8,
+            "count": 25,
+            "accuracy": 0.36,
+            "meanProbability": 0.689789898989899
+          },
+          {
+            "lower": 0.8,
+            "upper": 1,
+            "count": 119,
+            "accuracy": 0.9159663865546218,
+            "meanProbability": 0.970157881334352
+          }
+        ],
+        "ece": 0.10917880099698289
+      },
+      "highProbabilityErrors": 9,
+      "highProbabilityPredictions": 106,
+      "probabilitySumRange": [
+        0.99,
+        1
+      ],
+      "meanSeconds": 0.8395371544545273,
+      "medianSeconds": 0.863818389,
+      "secondsRange": [
+        0.28923401699995155,
+        1.5358417429999682
+      ],
+      "usd": 0.009400776000000001,
+      "unknownCosts": 0,
+      "reportedReasoningTokens": 0,
+      "crossRepeatLabelAgreement": {
+        "agree": 76,
+        "uniqueExamples": 77
+      },
+      "byRepeat": [
+        {
+          "repeat": 1,
+          "examples": 77,
+          "correct": 62,
+          "valid": 77,
+          "rawChoiceCorrectDiagnostic": 62,
+          "brier": 0.2990313975382845,
+          "logLoss": 2.193035131667779,
+          "calibration": {
+            "bins": [
+              {
+                "lower": 0,
+                "upper": 0.2,
+                "count": 0,
+                "accuracy": null,
+                "meanProbability": null
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.4,
+                "count": 1,
+                "accuracy": 1,
+                "meanProbability": 0.37
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.6,
+                "count": 5,
+                "accuracy": 0.4,
+                "meanProbability": 0.49800000000000005
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.8,
+                "count": 11,
+                "accuracy": 0.36363636363636365,
+                "meanProbability": 0.691524334251607
+              },
+              {
+                "lower": 0.8,
+                "upper": 1,
+                "count": 60,
+                "accuracy": 0.9166666666666666,
+                "meanProbability": 0.9681565656565657
+              }
+            ],
+            "ece": 0.10150859241768341
+          },
+          "usd": 0.004700388,
+          "meanSeconds": 0.9339238276363535
+        },
+        {
+          "repeat": 2,
+          "examples": 77,
+          "correct": 61,
+          "valid": 77,
+          "rawChoiceCorrectDiagnostic": 61,
+          "brier": 0.3065945160644885,
+          "logLoss": 2.2008259070521445,
+          "calibration": {
+            "bins": [
+              {
+                "lower": 0,
+                "upper": 0.2,
+                "count": 0,
+                "accuracy": null,
+                "meanProbability": null
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.4,
+                "count": 1,
+                "accuracy": 1,
+                "meanProbability": 0.38
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.6,
+                "count": 3,
+                "accuracy": 0.3333333333333333,
+                "meanProbability": 0.45999999999999996
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.8,
+                "count": 14,
+                "accuracy": 0.35714285714285715,
+                "meanProbability": 0.6884271284271284
+              },
+              {
+                "lower": 0.8,
+                "upper": 1,
+                "count": 59,
+                "accuracy": 0.9152542372881356,
+                "meanProbability": 0.9721931176168466
+              }
+            ],
+            "ece": 0.11684900957628241
+          },
+          "usd": 0.004700388,
+          "meanSeconds": 0.7451504812727004
+        }
+      ]
+    },
+    {
+      "arm": "llm-probabilities",
+      "calls": 22,
+      "structurallyValidCalls": 17,
+      "examplesIncludingRepeats": 154,
+      "correct": 91,
+      "validPredictions": 114,
+      "accuracy": 0.5909090909090909,
+      "rawChoiceCorrectDiagnostic": 121,
+      "validProbabilityRows": 114,
+      "brier": 0.3223650647253879,
+      "logLoss": 2.040747662170481,
+      "calibration": {
+        "bins": [
+          {
+            "lower": 0,
+            "upper": 0.2,
+            "count": 0,
+            "accuracy": null,
+            "meanProbability": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.4,
+            "count": 1,
+            "accuracy": 0,
+            "meanProbability": 0.25
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.6,
+            "count": 14,
+            "accuracy": 0.5714285714285714,
+            "meanProbability": 0.5153176308117232
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.8,
+            "count": 52,
+            "accuracy": 0.7115384615384616,
+            "meanProbability": 0.6948317307692308
+          },
+          {
+            "lower": 0.8,
+            "upper": 1,
+            "count": 47,
+            "accuracy": 0.9787234042553191,
+            "meanProbability": 0.873242152539865
+          }
+        ],
+        "ece": 0.06019229823914226
+      },
+      "highProbabilityErrors": 0,
+      "highProbabilityPredictions": 20,
+      "probabilitySumRange": [
+        0.95,
+        1.0000000000000002
+      ],
+      "meanSeconds": 42.96883447618183,
+      "medianSeconds": 50.802485828000044,
+      "secondsRange": [
+        8.45537969900004,
+        62.57584279500001
+      ],
+      "usd": 0.050260929999999995,
+      "unknownCosts": 0,
+      "reportedReasoningTokens": 1845,
+      "crossRepeatLabelAgreement": {
+        "agree": 70,
+        "uniqueExamples": 77
+      },
+      "byRepeat": [
+        {
+          "repeat": 1,
+          "examples": 77,
+          "correct": 43,
+          "valid": 54,
+          "rawChoiceCorrectDiagnostic": 59,
+          "brier": 0.31013475881920033,
+          "logLoss": 1.787992926383065,
+          "calibration": {
+            "bins": [
+              {
+                "lower": 0,
+                "upper": 0.2,
+                "count": 0,
+                "accuracy": null,
+                "meanProbability": null
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.4,
+                "count": 0,
+                "accuracy": null,
+                "meanProbability": null
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.6,
+                "count": 5,
+                "accuracy": 0.6,
+                "meanProbability": 0.5157894736842106
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.8,
+                "count": 27,
+                "accuracy": 0.6666666666666666,
+                "meanProbability": 0.6838206627680312
+              },
+              {
+                "lower": 0.8,
+                "upper": 1,
+                "count": 22,
+                "accuracy": 1,
+                "meanProbability": 0.8752367932819062
+              }
+            ],
+            "ece": 0.06720372359470102
+          },
+          "usd": 0.02870728,
+          "meanSeconds": 41.37885067227273
+        },
+        {
+          "repeat": 2,
+          "examples": 77,
+          "correct": 48,
+          "valid": 60,
+          "rawChoiceCorrectDiagnostic": 62,
+          "brier": 0.33337234004095695,
+          "logLoss": 2.2682269243791557,
+          "calibration": {
+            "bins": [
+              {
+                "lower": 0,
+                "upper": 0.2,
+                "count": 0,
+                "accuracy": null,
+                "meanProbability": null
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.4,
+                "count": 1,
+                "accuracy": 0,
+                "meanProbability": 0.25
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.6,
+                "count": 9,
+                "accuracy": 0.5555555555555556,
+                "meanProbability": 0.5150554958825635
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.8,
+                "count": 25,
+                "accuracy": 0.76,
+                "meanProbability": 0.7067236842105262
+              },
+              {
+                "lower": 0.8,
+                "upper": 1,
+                "count": 25,
+                "accuracy": 0.96,
+                "meanProbability": 0.8714868686868691
+              }
+            ],
+            "ece": 0.06932061191036741
+          },
+          "usd": 0.021553650000000004,
+          "meanSeconds": 44.55881828009093
+        }
+      ]
+    },
+    {
+      "arm": "llm-labels",
+      "calls": 22,
+      "structurallyValidCalls": 22,
+      "examplesIncludingRepeats": 154,
+      "correct": 118,
+      "validPredictions": 154,
+      "accuracy": 0.7662337662337663,
+      "rawChoiceCorrectDiagnostic": 118,
+      "validProbabilityRows": 0,
+      "brier": null,
+      "logLoss": null,
+      "calibration": {
+        "bins": [
+          {
+            "lower": 0,
+            "upper": 0.2,
+            "count": 0,
+            "accuracy": null,
+            "meanProbability": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.4,
+            "count": 0,
+            "accuracy": null,
+            "meanProbability": null
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.6,
+            "count": 0,
+            "accuracy": null,
+            "meanProbability": null
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.8,
+            "count": 0,
+            "accuracy": null,
+            "meanProbability": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 1,
+            "count": 0,
+            "accuracy": null,
+            "meanProbability": null
+          }
+        ],
+        "ece": null
+      },
+      "highProbabilityErrors": 0,
+      "highProbabilityPredictions": 0,
+      "probabilitySumRange": null,
+      "meanSeconds": 5.615106406181813,
+      "medianSeconds": 5.851429535999952,
+      "secondsRange": [
+        2.267536323000095,
+        9.387176399999996
+      ],
+      "usd": 0.01179881,
+      "unknownCosts": 0,
+      "reportedReasoningTokens": 1294,
+      "crossRepeatLabelAgreement": {
+        "agree": 69,
+        "uniqueExamples": 77
+      },
+      "byRepeat": [
+        {
+          "repeat": 1,
+          "examples": 77,
+          "correct": 60,
+          "valid": 77,
+          "rawChoiceCorrectDiagnostic": 60,
+          "brier": null,
+          "logLoss": null,
+          "calibration": {
+            "bins": [
+              {
+                "lower": 0,
+                "upper": 0.2,
+                "count": 0,
+                "accuracy": null,
+                "meanProbability": null
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.4,
+                "count": 0,
+                "accuracy": null,
+                "meanProbability": null
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.6,
+                "count": 0,
+                "accuracy": null,
+                "meanProbability": null
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.8,
+                "count": 0,
+                "accuracy": null,
+                "meanProbability": null
+              },
+              {
+                "lower": 0.8,
+                "upper": 1,
+                "count": 0,
+                "accuracy": null,
+                "meanProbability": null
+              }
+            ],
+            "ece": null
+          },
+          "usd": 0.0071335750000000005,
+          "meanSeconds": 6.430222315636345
+        },
+        {
+          "repeat": 2,
+          "examples": 77,
+          "correct": 58,
+          "valid": 77,
+          "rawChoiceCorrectDiagnostic": 58,
+          "brier": null,
+          "logLoss": null,
+          "calibration": {
+            "bins": [
+              {
+                "lower": 0,
+                "upper": 0.2,
+                "count": 0,
+                "accuracy": null,
+                "meanProbability": null
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.4,
+                "count": 0,
+                "accuracy": null,
+                "meanProbability": null
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.6,
+                "count": 0,
+                "accuracy": null,
+                "meanProbability": null
+              },
+              {
+                "lower": 0.6,
+                "upper": 0.8,
+                "count": 0,
+                "accuracy": null,
+                "meanProbability": null
+              },
+              {
+                "lower": 0.8,
+                "upper": 1,
+                "count": 0,
+                "accuracy": null,
+                "meanProbability": null
+              }
+            ],
+            "ece": null
+          },
+          "usd": 0.004665235,
+          "meanSeconds": 4.799990496727278
+        }
+      ]
+    }
+  ],
+  "matchedProbabilityMetrics": {
+    "jev": {
+      "rows": 114,
+      "correct": 89,
+      "brier": 0.31027975161861404,
+      "logLoss": 2.214982960440764,
+      "calibration": {
+        "bins": [
+          {
+            "lower": 0,
+            "upper": 0.2,
+            "count": 0,
+            "accuracy": null,
+            "meanProbability": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.4,
+            "count": 2,
+            "accuracy": 1,
+            "meanProbability": 0.375
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.6,
+            "count": 7,
+            "accuracy": 0.2857142857142857,
+            "meanProbability": 0.47857142857142865
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.8,
+            "count": 22,
+            "accuracy": 0.36363636363636365,
+            "meanProbability": 0.6815794306703397
+          },
+          {
+            "lower": 0.8,
+            "upper": 1,
+            "count": 83,
+            "accuracy": 0.927710843373494,
+            "meanProbability": 0.9681854691493244
+          }
+        ],
+        "ece": 0.11363281942229292
+      }
+    },
+    "llm": {
+      "rows": 114,
+      "correct": 91,
+      "brier": 0.3223650647253879,
+      "logLoss": 2.040747662170481,
+      "calibration": {
+        "bins": [
+          {
+            "lower": 0,
+            "upper": 0.2,
+            "count": 0,
+            "accuracy": null,
+            "meanProbability": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.4,
+            "count": 1,
+            "accuracy": 0,
+            "meanProbability": 0.25
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.6,
+            "count": 14,
+            "accuracy": 0.5714285714285714,
+            "meanProbability": 0.5153176308117232
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.8,
+            "count": 52,
+            "accuracy": 0.7115384615384616,
+            "meanProbability": 0.6948317307692308
+          },
+          {
+            "lower": 0.8,
+            "upper": 1,
+            "count": 47,
+            "accuracy": 0.9787234042553191,
+            "meanProbability": 0.873242152539865
+          }
+        ],
+        "ece": 0.06019229823914226
+      }
+    }
+  },
+  "pairedLabelComparisons": [
+    {
+      "repeat": 1,
+      "bothCorrect": 59,
+      "jevOnlyCorrect": 3,
+      "llmOnlyCorrect": 1,
+      "bothIncorrect": 14
+    },
+    {
+      "repeat": 2,
+      "bothCorrect": 56,
+      "jevOnlyCorrect": 5,
+      "llmOnlyCorrect": 2,
+      "bothIncorrect": 14
+    }
+  ],
+  "pairedTiming": [
+    {
+      "arm": "llm-probabilities",
+      "medianPairedLatencyRatio": 57.16067997113303,
+      "ratioRange": [
+        9.750963796110911,
+        178.38638239778246
+      ]
+    },
+    {
+      "arm": "llm-labels",
+      "medianPairedLatencyRatio": 6.782369192813335,
+      "ratioRange": [
+        1.669264932289188,
+        25.202509796768627
+      ]
+    }
+  ],
+  "caveat": "77 unique examples repeated twice; no significance or general calibration claim. Raw-choice accuracy is post-hoc diagnostic only; it does not repair invalid distributions."
+}
