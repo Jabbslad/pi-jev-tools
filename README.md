@@ -8,6 +8,14 @@ This is a **tool extension, not a main-model provider**. Keep your normal coding
 
 Requires Node.js 22+ and Pi. `jev_search` also requires `rg` (ripgrep) on PATH. Tested against `@earendil-works/pi-coding-agent` **0.85.1**; older Pi releases using the `@mariozechner` package names are not supported by this version.
 
+Install from npm (persistent):
+
+```sh
+pi install npm:pi-jev-tools
+```
+
+Or run from a local checkout:
+
 ```sh
 npm ci
 # Set TYPESAFE_API_KEY in your shell or secret manager; don't commit it.
@@ -17,7 +25,7 @@ pi -e ./index.ts
 
 The extension does not load `.env` files. Missing credentials do not prevent startup; they produce an error when an API evaluation is needed.
 
-For persistent local installation, run `pi install /absolute/path/to/pi-jev-tools`. This changes your Pi package settings; it is not required to try the extension. No global configuration is changed by this project's tests.
+For persistent installation from a local checkout, run `pi install /absolute/path/to/pi-jev-tools`. This changes your Pi package settings; it is not required to try the extension. No global configuration is changed by this project's tests.
 
 Example prompt:
 

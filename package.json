@@ -6,6 +6,12 @@
   "keywords": [
     "pi-package"
   ],
+  "license": "MIT",
+  "author": "Jabbslad",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jabbslad/pi-jev-tools.git"
+  },
   "files": [
     "index.ts",
     "src",
@@ -32,7 +38,8 @@
   "scripts": {
     "test": "tsx --test test/*.test.ts",
     "typecheck": "tsc --noEmit",
-    "test:live": "tsx scripts/smoke.ts"
+    "test:live": "tsx scripts/smoke.ts",
+    "prepublishOnly": "npm run typecheck && npm test"
   },
   "dependencies": {
     "@typesafe-ai/sdk": "^0.6.0",
