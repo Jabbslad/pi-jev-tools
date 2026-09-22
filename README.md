@@ -125,6 +125,7 @@ Example prompt: “Use jev_search under src and docs to locate the refresh guard
 - **Noul:** yes/no question; optional `criteria.true` / `criteria.false` descriptions. Returns `noul`, the probability of yes, not a boolean. No separate confidence field.
 - **State:** string, JSON object, or JSON array. Only supplied state/questions are sent by this generic tool; it does not read files or automatically attach the conversation.
 - **Instructions:** nonempty strings in v1. The underlying API has additional structured-instruction options that this tool intentionally does not expose.
+- **Missing `type`:** Pi infers it only for unambiguous question shapes (Score array, Choice named map with at least two options, or Noul with no criteria, empty criteria, or one yes/no description). A `{ "true": ..., "false": ... }` map could be Choice or Noul and still requires an explicit `type`. Invalid shapes remain errors; direct tool invocations must supply `type`.
 - **Model:** `jev-latest` (default), `jev-preview`, or pinned `jev-1.13.0`. Pin for reproducible evaluations. Aliases can change.
 
 All questions share the state but are evaluated independently. Answers preserve the question IDs; the IDs themselves do not communicate instructions to Jev. Dependent questions require sequential calls or independent speculative evaluations followed by selection in code.

@@ -5,9 +5,10 @@ import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { discoverAndLoadExtensions, type ExtensionAPI, type ExtensionContext } from "@earendil-works/pi-coding-agent";
 import { TypeSafeClient, type Fetch } from "@typesafe-ai/sdk";
+import { Check } from "typebox/value";
 import extension from "../index.ts";
 import { createEvaluateTool, clientConfig } from "../src/tool.ts";
-import type { EvaluateParams } from "../src/schema.ts";
+import { parameters, type EvaluateParams } from "../src/schema.ts";
 
 const params: EvaluateParams = {
   state: { message: "Please refund my duplicate charge." },
@@ -79,6 +80,37 @@ test("sends one batch, preserves all answers, and reports nested usage", async (
   assert.equal(result.usage.totalTokens, 1050);
   assert.equal(result.usage.cost.input, 0.000042);
   assert.equal(result.usage.cost.output, 0);
+});
+
+test("Pi prepares missing types for unambiguous Choice, Score, and Noul questions", async () => {
+  const tool = toolWithFetch(async (_url, init) => {
+    assert.deepEqual(JSON.parse(String(init?.body)), { ...params, model: "jev-latest" });
+    return Response.json(response);
+  });
+  const missing = { ...params, questions: {
+    category: { instructions: "Which category?", criteria: { billing: "Payments", other: null } },
+    urgency: { instructions: "How urgent?", criteria: ["Routine", "Urgent"] },
+    refund: { instructions: "Is a refund requested?" },
+  } };
+  const prepared = tool.prepareArguments!(missing);
+  assert.deepEqual(prepared, params);
+  assert.ok(Check(parameters, prepared));
+  await run(tool, prepared);
+  assert.deepEqual(missing.questions.category, { instructions: "Which category?", criteria: { billing: "Payments", other: null } });
+});
+
+test("Pi leaves ambiguous and explicit question types for strict validation", () => {
+  const tool = createEvaluateTool();
+  const ambiguous = { ...params, questions: { q: { instructions: "Which?", criteria: { true: "Yes", false: "No" } } } };
+  assert.deepEqual(tool.prepareArguments!(ambiguous), ambiguous);
+  assert.equal(Check(parameters, tool.prepareArguments!(ambiguous)), false);
+  const oneNoulCriterion = { ...params, questions: { q: { instructions: "Is it true?", criteria: { true: "Yes" } } } };
+  assert.equal(tool.prepareArguments!(oneNoulCriterion).questions.q.type, "noul");
+  const missingChoice = { ...params, questions: { q: { instructions: "Pick", criteria: { billing: "Payments" } } } };
+  assert.equal(Check(parameters, tool.prepareArguments!(missingChoice)), false);
+  const explicit = { ...params, questions: { q: { type: "noul", instructions: "Yes?", criteria: { maybe: "Perhaps" } } } };
+  assert.deepEqual(tool.prepareArguments!(explicit), explicit);
+  assert.equal(Check(parameters, tool.prepareArguments!(explicit)), false);
 });
 
 test("accepts a pinned model and array state", async () => {

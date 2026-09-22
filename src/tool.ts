@@ -1,6 +1,6 @@
 import { Check } from "typebox/value";
 import { defineTool } from "@earendil-works/pi-coding-agent";
-import { parameters } from "./schema.ts";
+import { parameters, type EvaluateParams } from "./schema.ts";
 import { defaultClient, evaluateRequests, type ClientFactory } from "./client.ts";
 export { clientConfig } from "./client.ts";
 
@@ -30,6 +30,26 @@ export function createEvaluateTool(
       "typesafe_evaluate cannot save the cost of context already read by the main model. Do not claim retrieval savings merely from forwarding previously read search results.",
     ],
     parameters,
+    prepareArguments(args) {
+      if (!args || typeof args !== "object" || Array.isArray(args)) return args as EvaluateParams;
+      const input = args as Record<string, unknown>;
+      if (!input.questions || typeof input.questions !== "object" || Array.isArray(input.questions)) return args as EvaluateParams;
+      const questions = Object.fromEntries(Object.entries(input.questions).map(([id, question]) => {
+        if (!question || typeof question !== "object" || Array.isArray(question) || "type" in question) return [id, question];
+        const item = question as Record<string, unknown>;
+        const criteria = item.criteria;
+        let type: "score" | "choice" | "noul" | undefined;
+        if (Array.isArray(criteria)) type = "score";
+        else if (criteria === undefined) type = "noul";
+        else if (criteria && typeof criteria === "object") {
+          const keys = Object.keys(criteria);
+          if (keys.length < 2 && keys.every(key => key === "true" || key === "false")) type = "noul";
+          else if (keys.length >= 2 && !keys.every(key => key === "true" || key === "false")) type = "choice";
+        }
+        return [id, type ? { ...item, type } : question];
+      }));
+      return { ...input, questions } as EvaluateParams;
+    },
     async execute(_toolCallId, params, signal) {
       // Also validate direct invocations (e.g. tests), not only Pi's tool loop.
       if (!Check(parameters, params)) {

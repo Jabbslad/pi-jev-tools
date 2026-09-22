@@ -1,6 +1,6 @@
 {
   "name": "pi-jev-tools",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "TypeSafe ranking, classification, retrieval and structured-decision tools for Pi coding agents",
   "type": "module",
   "keywords": [
